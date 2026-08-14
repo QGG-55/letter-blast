@@ -18,7 +18,7 @@ export function completedLines(board: Board): Point[][] {
 }
 function runs(board: Board): WordEvent[] {
   const out: WordEvent[]=[]
-  const scan=(pts:Point[])=>{let cells:Point[]=[];const flush=()=>{if(cells.length>=3){const word=cells.map(p=>board[p.row][p.col]?.letter).join('');if(isValidWord(word))out.push({word,cells:[...cells]})}cells=[]};pts.forEach(p=>board[p.row][p.col]?cells.push(p):flush());flush()}
+  const scan=(pts:Point[])=>{let cells:Point[]=[];const flush=()=>{for(let start=0;start<=cells.length-3;start++)for(let end=start+3;end<=cells.length;end++){const candidate=cells.slice(start,end),word=candidate.map(p=>board[p.row][p.col]?.letter).join('');if(isValidWord(word))out.push({word,cells:candidate})}cells=[]};pts.forEach(p=>board[p.row][p.col]?cells.push(p):flush());flush()}
   for(let r=0;r<SIZE;r++)scan(Array.from({length:SIZE},(_,c)=>({row:r,col:c})))
   for(let c=0;c<SIZE;c++)scan(Array.from({length:SIZE},(_,r)=>({row:r,col:c})))
   return out

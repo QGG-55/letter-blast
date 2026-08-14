@@ -1,6 +1,6 @@
 # Letter Blast
 
-Fuente de verdad del proyecto. **Versión actual: v0.1.1**.
+Fuente de verdad del proyecto. **Versión actual: v0.1.2**.
 
 ## Concepto y reglas
 
@@ -17,7 +17,7 @@ Puzle web móvil sobre un tablero 8×8. Se arrastran figuras de letras sin salir
 
 ## Decisiones
 
-La detección considera cada secuencia contigua completa de al menos tres letras; no busca subpalabras dentro de una secuencia más larga. Palabras y líneas se evalúan sobre el mismo tablero recién colocado y sus eventos puntúan por separado. La bandeja se repone después de usar las tres figuras. Se usan Pointer Events con una elevación visual de 70 px para que el dedo no tape el destino.
+La detección examina todas las palabras posibles de al menos tres letras dentro de cada secuencia contigua, de modo que `DIA` se reconoce también dentro de `AXDIAU`. Palabras y líneas se evalúan sobre el mismo tablero recién colocado y sus eventos puntúan por separado. La bandeja se repone después de usar las tres figuras. Se usan Pointer Events con una elevación visual de 70 px para que el dedo no tape el destino.
 
 ## Estado actual
 
@@ -31,6 +31,7 @@ Pendientes: diccionario español definitivo, pruebas E2E en dispositivos reales 
 
 - v0.1.0: primer MVP jugable.
 - v0.1.1: todas las casillas del tablero y bloques de figuras mantienen dimensiones perfectamente cuadradas y uniformes.
+- v0.1.2: detección de palabras válidas contenidas dentro de secuencias de letras más largas.
 
 ## Siguientes hitos
 
