@@ -1,0 +1,15 @@
+{
+  "name": "letter-blast",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "eslint .",
+    "test": "vitest run",
+    "preview": "vite preview"
+  },
+  "dependencies": { "react": "latest", "react-dom": "latest" },
+  "devDependencies": { "@eslint/js": "latest", "@types/react": "latest", "@types/react-dom": "latest", "@typescript-eslint/typescript-estree": "latest", "@vitejs/plugin-react": "latest", "eslint": "latest", "eslint-plugin-react-hooks": "latest", "eslint-plugin-react-refresh": "latest", "globals": "latest", "typescript": "~6.0.0", "typescript-eslint": "latest", "vite": "latest", "vitest": "latest" }
+}

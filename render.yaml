@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: letter-blast
+    runtime: static
+    buildCommand: corepack enable && pnpm install --frozen-lockfile && pnpm build
+    staticPublishPath: ./dist
+    autoDeploy: true

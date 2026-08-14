@@ -1,0 +1,5 @@
+{
+  "name": "Letter Blast", "short_name": "Letter Blast", "description": "Puzle de letras y figuras",
+  "start_url": "/", "display": "standalone", "background_color": "#11162b", "theme_color": "#11162b",
+  "icons": [{"src":"/icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}]
+}
