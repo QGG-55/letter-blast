@@ -3,7 +3,7 @@ import { canPlace,canPlaceAny,centeredOrigin,emptyBoard,isBoardEmpty,key,multipl
 import { makeTray } from '../game/pieces'
 import type { Board,Piece,Point } from '../game/types'
 type Drag={piece:Piece;index:number;origin:Point|null;x:number;y:number}
-const VERSION='v0.1.6'
+const VERSION='v0.1.7'
 const RESOLUTION_MS=1100
 const INITIAL_TIME=Date.now()
 export default function App(){
@@ -20,9 +20,8 @@ export default function App(){
   const nextPieces=pieces.filter((_,i)=>i!==index)
   if(result.baseScore){
    const cleared=isBoardEmpty(result.board)
-   const messages=[...result.words.map(w=>`${w.word} ×${m}`),...result.lines.map(()=>`LÍNEA ×${m}`)]
    setScore(points=>points+scoreResolution(result,m));setCycle(Date.now());setNow(Date.now())
-   setToast([...(messages.length>1?[...messages,`COMBO ×${m}`]:messages),...(cleared?[`TABLERO VACÍO ×${m}`]:[])])
+   setToast([`×${m}`])
    if(cleared)setPalette(color=>(color+1)%5)
    if(result.words.length)setRecentWords(words=>[...result.words.map(w=>w.word),...words].slice(0,6))
    setRemoving(new Set(result.removed.map(key)));setBoard(placed)
@@ -36,7 +35,7 @@ export default function App(){
   <header><div><span className="eyebrow">WORD PUZZLE</span><h1>LETTER <b>BLAST</b></h1></div><span className="version">{VERSION}</span></header>
   <section className="hud"><div><small>PUNTOS</small><strong>{String(score).padStart(4,'0')}</strong></div><div className="mult"><small>MULTIPLICADOR</small><strong>×{multiplier}</strong><i style={{transform:`scaleX(${multiplier===1?0:Math.max(0,1-(now-cycle)%3000/3000)})`}}/></div></section>
   <section className="word-history" aria-live="polite"><small>ÚLTIMAS PALABRAS</small><div>{recentWords.length?recentWords.map((word,i)=><span key={`${word}-${i}`}>{word}</span>):<em>—</em>}</div></section>
-  <div className="stage"><div className="board" ref={boardRef}>{board.flatMap((row,r)=>row.map((cell,c)=><div key={`${r}-${c}`} className={`cell ${cell?'filled':''} ${preview.has(`${r}:${c}`)?(valid?'preview valid':'preview invalid'):''} ${removing.has(`${r}:${c}`)?'removing':''}`}>{cell?.letter}</div>))}</div>{toast.length>0&&<div className="toasts" aria-live="assertive">{toast.map((t,i)=><span className={t.startsWith('TABLERO')?'clear':''} key={i}>{t}</span>)}</div>}</div>
+  <div className="stage"><div className="board" ref={boardRef}>{board.flatMap((row,r)=>row.map((cell,c)=><div key={`${r}-${c}`} className={`cell ${cell?'filled':''} ${preview.has(`${r}:${c}`)?(valid?'preview valid':'preview invalid'):''} ${removing.has(`${r}:${c}`)?'removing':''}`}>{cell?.letter}</div>))}</div>{toast.length>0&&<div className="toasts" aria-live="assertive">{toast.map((t,i)=><span key={i}>{t}</span>)}</div>}</div>
   <p className="hint">ARRASTRA UNA FIGURA AL TABLERO</p><div className="tray">{pieces.map((p,i)=><div className={`piece-slot ${drag?.index===i?'dragging':''}`} key={p.id} onPointerDown={e=>start(e,i)} onPointerMove={move} onPointerUp={finish} onPointerCancel={()=>setDrag(null)}><PieceView piece={p}/></div>)}</div>
   {drag&&<div className="drag-ghost" style={{left:drag.x,top:drag.y-70}}><PieceView piece={drag.piece}/></div>}{gameOver&&<div className="modal"><div><span>FIN DE LA PARTIDA</span><h2>GAME OVER</h2><p>PUNTUACIÓN FINAL</p><strong>{score}</strong><button onClick={reset}>NUEVA PARTIDA</button></div></div>}<footer>Forma palabras · Completa líneas · Mantén el ×5</footer>
  </main>
