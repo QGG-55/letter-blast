@@ -3,6 +3,7 @@ import type { Board, Cell, Piece, Point, Resolution, WordEvent } from './types'
 export const SIZE = 8
 export const emptyBoard = (): Board => Array.from({length:SIZE}, () => Array<Cell>(SIZE).fill(null))
 export const key = ({row,col}: Point) => `${row}:${col}`
+export const isBoardEmpty = (board: Board) => board.every(row=>row.every(cell=>!cell))
 export function centeredOrigin(pointer: Point, piece: Piece): Point {
   const rows=piece.cells.map(cell=>cell.row),cols=piece.cells.map(cell=>cell.col)
   const centerRow=(Math.min(...rows)+Math.max(...rows))/2,centerCol=(Math.min(...cols)+Math.max(...cols))/2

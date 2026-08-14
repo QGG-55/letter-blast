@@ -1,6 +1,6 @@
 # Letter Blast
 
-Fuente de verdad del proyecto. **Versión actual: v0.1.5**.
+Fuente de verdad del proyecto. **Versión actual: v0.1.6**.
 
 ## Concepto y reglas
 
@@ -35,6 +35,7 @@ Pendientes: diccionario español definitivo, pruebas E2E en dispositivos reales 
 - v0.1.3: panel persistente con las seis palabras completadas más recientes.
 - v0.1.4: previsualización de arrastre alineada con los centros reales de las casillas y de cada figura.
 - v0.1.5: explosiones más largas con destello, partículas, onda expansiva, impacto y desglose visible de puntos y total.
+- v0.1.6: cantidades ocultas en los carteles de explosión, eventos centrados en el multiplicador y paletas rotatorias al vaciar el tablero.
 
 ## Siguientes hitos
 

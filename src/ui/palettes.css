@@ -1,0 +1,6 @@
+.palette-1 .mini,.palette-1 .cell.filled { background:linear-gradient(145deg,#87f7e6,#25cbb7);box-shadow:inset 0 -3px 0 #168f82,0 3px 10px #25cbb744;color:#123631 }
+.palette-2 .mini,.palette-2 .cell.filled { background:linear-gradient(145deg,#c8a2ff,#8758e8);box-shadow:inset 0 -3px 0 #6036b9,0 3px 10px #8758e844;color:#241540 }
+.palette-3 .mini,.palette-3 .cell.filled { background:linear-gradient(145deg,#d6f66c,#7fcf3f);box-shadow:inset 0 -3px 0 #4e9825,0 3px 10px #7fcf3f44;color:#203714 }
+.palette-4 .mini,.palette-4 .cell.filled { background:linear-gradient(145deg,#75c9ff,#3885ee);box-shadow:inset 0 -3px 0 #245cb6,0 3px 10px #3885ee44;color:#102b52 }
+
+.resolving .toasts span.clear { background:linear-gradient(135deg,#6cf0d5,#23bca7);color:#0c332e;border-color:#c8fff5;font-size:21px }
