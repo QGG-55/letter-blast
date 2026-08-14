@@ -1,6 +1,6 @@
 # Letter Blast
 
-Fuente de verdad del proyecto. **Versión actual: v0.1.0**.
+Fuente de verdad del proyecto. **Versión actual: v0.1.1**.
 
 ## Concepto y reglas
 
@@ -30,6 +30,7 @@ Pendientes: diccionario español definitivo, pruebas E2E en dispositivos reales 
 ## Historial resumido
 
 - v0.1.0: primer MVP jugable.
+- v0.1.1: todas las casillas del tablero y bloques de figuras mantienen dimensiones perfectamente cuadradas y uniformes.
 
 ## Siguientes hitos
 
