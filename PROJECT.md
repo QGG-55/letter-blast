@@ -1,6 +1,6 @@
 # Letter Blast
 
-Fuente de verdad del proyecto. **Versión actual: v0.1.2**.
+Fuente de verdad del proyecto. **Versión actual: v0.1.3**.
 
 ## Concepto y reglas
 
@@ -32,6 +32,7 @@ Pendientes: diccionario español definitivo, pruebas E2E en dispositivos reales 
 - v0.1.0: primer MVP jugable.
 - v0.1.1: todas las casillas del tablero y bloques de figuras mantienen dimensiones perfectamente cuadradas y uniformes.
 - v0.1.2: detección de palabras válidas contenidas dentro de secuencias de letras más largas.
+- v0.1.3: panel persistente con las seis palabras completadas más recientes.
 
 ## Siguientes hitos
 
