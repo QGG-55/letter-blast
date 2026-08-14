@@ -1,1 +1,0 @@
-{"root":["./src/main.tsx","./src/vite-env.d.ts","./src/game/dictionary.ts","./src/game/engine.test.ts","./src/game/engine.ts","./src/game/pieces.ts","./src/game/types.ts","./src/ui/app.tsx"],"version":"6.0.3"}
