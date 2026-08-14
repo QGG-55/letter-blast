@@ -21,7 +21,9 @@ La detección considera cada secuencia contigua completa de al menos tres letras
 
 ## Estado actual
 
-Terminadas: tablero, figuras, letras, validación, drag táctil/ratón, previsualización válida/inválida, líneas, palabras horizontales/verticales, diccionario de prueba, puntuación combinada, multiplicador, animación de explosión, mensajes de eventos, game over, nueva partida, PWA básica y suite unitaria.
+Terminadas: tablero, figuras, letras, validación, drag táctil/ratón, previsualización válida/inválida, líneas, palabras horizontales/verticales, diccionario de prueba, puntuación combinada, multiplicador, animación de explosión, mensajes de eventos, game over, nueva partida, PWA básica, suite unitaria y publicación continua.
+
+Publicación: repositorio público en `https://github.com/QGG-55/letter-blast` y Static Site de Render en `https://letter-blast.onrender.com`, rama `main`, build con lockfile y autodespliegue por commit.
 
 Pendientes: diccionario español definitivo, pruebas E2E en dispositivos reales y mejoras offline. Fuera de alcance: usuarios, backend, ranking, multijugador, publicidad, compras, niveles, sonidos e IA.
 
