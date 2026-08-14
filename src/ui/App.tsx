@@ -1,14 +1,14 @@
 import { useCallback,useEffect,useRef,useState } from 'react'
-import { canPlace,canPlaceAny,emptyBoard,key,multiplierAt,place,resolve,scoreResolution,SIZE } from '../game/engine'
+import { canPlace,canPlaceAny,centeredOrigin,emptyBoard,key,multiplierAt,place,resolve,scoreResolution,SIZE } from '../game/engine'
 import { makeTray } from '../game/pieces'
 import type { Board,Piece,Point } from '../game/types'
 type Drag={piece:Piece;index:number;origin:Point|null;x:number;y:number}
-const VERSION='v0.1.3'
+const VERSION='v0.1.4'
 const INITIAL_TIME=Date.now()
 export default function App(){
  const [board,setBoard]=useState<Board>(emptyBoard);const [pieces,setPieces]=useState<Piece[]>(makeTray);const [score,setScore]=useState(0);const [cycle,setCycle]=useState(INITIAL_TIME);const [now,setNow]=useState(INITIAL_TIME);const [drag,setDrag]=useState<Drag|null>(null);const [toast,setToast]=useState<string[]>([]);const [recentWords,setRecentWords]=useState<string[]>([]);const [removing,setRemoving]=useState(new Set<string>());const boardRef=useRef<HTMLDivElement>(null);const multiplier=multiplierAt(now-cycle);const gameOver=!canPlaceAny(board,pieces)
  useEffect(()=>{const id=setInterval(()=>setNow(Date.now()),200);return()=>clearInterval(id)},[])
- const locate=useCallback((x:number,y:number,piece:Piece)=>{const rect=boardRef.current?.getBoundingClientRect();if(!rect)return null;const size=rect.width/SIZE;const minRow=Math.min(...piece.cells.map(c=>c.row)),minCol=Math.min(...piece.cells.map(c=>c.col));const row=Math.floor((y-rect.top)/size)-minRow,col=Math.floor((x-rect.left)/size)-minCol;return {row,col}},[])
+ const locate=useCallback((x:number,y:number,piece:Piece)=>{const board=boardRef.current,first=board?.children[0]?.getBoundingClientRect(),right=board?.children[1]?.getBoundingClientRect(),below=board?.children[SIZE]?.getBoundingClientRect();if(!first||!right||!below)return null;const col=(x-(first.left+first.width/2))/(right.left-first.left),row=(y-(first.top+first.height/2))/(below.top-first.top);return centeredOrigin({row,col},piece)},[])
  const start=(e:React.PointerEvent,index:number)=>{e.currentTarget.setPointerCapture(e.pointerId);const p=pieces[index];setDrag({piece:p,index,origin:locate(e.clientX,e.clientY-70,p),x:e.clientX,y:e.clientY})}
  const move=(e:React.PointerEvent)=>setDrag(d=>d?{...d,x:e.clientX,y:e.clientY,origin:locate(e.clientX,e.clientY-70,d.piece)}:null)
  const finish=()=>{if(!drag)return;const {piece,index,origin}=drag;setDrag(null);if(!origin||!canPlace(board,piece,origin))return;const placed=place(board,piece,origin),result=resolve(placed),m=multiplier;const nextPieces=pieces.filter((_,i)=>i!==index);if(result.baseScore){setScore(s=>s+scoreResolution(result,m));setCycle(Date.now());setNow(Date.now());setToast([...result.words.map(w=>`${w.word} +${w.cells.length*10*m}`),...result.lines.map(()=>`LÍNEA +${20*m}`)]);if(result.words.length)setRecentWords(words=>[...result.words.map(w=>w.word),...words].slice(0,6));setRemoving(new Set(result.removed.map(key)));setBoard(placed);setTimeout(()=>{setBoard(result.board);setRemoving(new Set());setToast([])},320)}else setBoard(placed);setPieces(nextPieces.length?nextPieces:makeTray())}
