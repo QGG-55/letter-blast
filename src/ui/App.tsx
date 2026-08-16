@@ -3,15 +3,16 @@ import { canPlace,canPlaceAny,centeredOrigin,emptyBoard,isBoardEmpty,key,multipl
 import { makeTray } from '../game/pieces'
 import type { Board,Piece,Point } from '../game/types'
 type Drag={piece:Piece;index:number;origin:Point|null;x:number;y:number}
-const VERSION='v0.1.7'
+const VERSION='v0.1.8'
 const RESOLUTION_MS=1100
 const INITIAL_TIME=Date.now()
 export default function App(){
- const [board,setBoard]=useState<Board>(emptyBoard);const [pieces,setPieces]=useState<Piece[]>(makeTray);const [score,setScore]=useState(0);const [cycle,setCycle]=useState(INITIAL_TIME);const [now,setNow]=useState(INITIAL_TIME);const [drag,setDrag]=useState<Drag|null>(null);const [toast,setToast]=useState<string[]>([]);const [recentWords,setRecentWords]=useState<string[]>([]);const [palette,setPalette]=useState(0);const [removing,setRemoving]=useState(new Set<string>());const boardRef=useRef<HTMLDivElement>(null);const multiplier=multiplierAt(now-cycle);const gameOver=!canPlaceAny(board,pieces)
+ const [board,setBoard]=useState<Board>(emptyBoard);const [pieces,setPieces]=useState<Piece[]>(makeTray);const [score,setScore]=useState(0);const [cycle,setCycle]=useState(INITIAL_TIME);const [now,setNow]=useState(INITIAL_TIME);const [drag,setDrag]=useState<Drag|null>(null);const [toast,setToast]=useState<string[]>([]);const [recentWords,setRecentWords]=useState<string[]>([]);const [palette,setPalette]=useState(0);const [removing,setRemoving]=useState(new Set<string>());const boardRef=useRef<HTMLDivElement>(null);const multiplier=multiplierAt(now-cycle);const gameOver=!canPlaceAny(board,pieces);const dragging=drag!==null
  useEffect(()=>{const id=setInterval(()=>setNow(Date.now()),200);return()=>clearInterval(id)},[])
+ useEffect(()=>{document.body.classList.toggle('drag-active',dragging);return()=>document.body.classList.remove('drag-active')},[dragging])
  const locate=useCallback((x:number,y:number,piece:Piece)=>{const board=boardRef.current,first=board?.children[0]?.getBoundingClientRect(),right=board?.children[1]?.getBoundingClientRect(),below=board?.children[SIZE]?.getBoundingClientRect();if(!first||!right||!below)return null;const col=(x-(first.left+first.width/2))/(right.left-first.left),row=(y-(first.top+first.height/2))/(below.top-first.top);return centeredOrigin({row,col},piece)},[])
- const start=(e:React.PointerEvent,index:number)=>{e.currentTarget.setPointerCapture(e.pointerId);const p=pieces[index];setDrag({piece:p,index,origin:locate(e.clientX,e.clientY-70,p),x:e.clientX,y:e.clientY})}
- const move=(e:React.PointerEvent)=>setDrag(d=>d?{...d,x:e.clientX,y:e.clientY,origin:locate(e.clientX,e.clientY-70,d.piece)}:null)
+ const start=(e:React.PointerEvent,index:number)=>{e.preventDefault();e.currentTarget.setPointerCapture(e.pointerId);const p=pieces[index];setDrag({piece:p,index,origin:locate(e.clientX,e.clientY-70,p),x:e.clientX,y:e.clientY})}
+ const move=(e:React.PointerEvent)=>{e.preventDefault();setDrag(d=>d?{...d,x:e.clientX,y:e.clientY,origin:locate(e.clientX,e.clientY-70,d.piece)}:null)}
  const finish=()=>{
   if(!drag)return
   const {piece,index,origin}=drag;setDrag(null)
@@ -36,7 +37,7 @@ export default function App(){
   <section className="hud"><div><small>PUNTOS</small><strong>{String(score).padStart(4,'0')}</strong></div><div className="mult"><small>MULTIPLICADOR</small><strong>×{multiplier}</strong><i style={{transform:`scaleX(${multiplier===1?0:Math.max(0,1-(now-cycle)%3000/3000)})`}}/></div></section>
   <section className="word-history" aria-live="polite"><small>ÚLTIMAS PALABRAS</small><div>{recentWords.length?recentWords.map((word,i)=><span key={`${word}-${i}`}>{word}</span>):<em>—</em>}</div></section>
   <div className="stage"><div className="board" ref={boardRef}>{board.flatMap((row,r)=>row.map((cell,c)=><div key={`${r}-${c}`} className={`cell ${cell?'filled':''} ${preview.has(`${r}:${c}`)?(valid?'preview valid':'preview invalid'):''} ${removing.has(`${r}:${c}`)?'removing':''}`}>{cell?.letter}</div>))}</div>{toast.length>0&&<div className="toasts" aria-live="assertive">{toast.map((t,i)=><span key={i}>{t}</span>)}</div>}</div>
-  <p className="hint">ARRASTRA UNA FIGURA AL TABLERO</p><div className="tray">{pieces.map((p,i)=><div className={`piece-slot ${drag?.index===i?'dragging':''}`} key={p.id} onPointerDown={e=>start(e,i)} onPointerMove={move} onPointerUp={finish} onPointerCancel={()=>setDrag(null)}><PieceView piece={p}/></div>)}</div>
+  <div className="tray">{pieces.map((p,i)=><div className={`piece-slot ${drag?.index===i?'dragging':''}`} key={p.id} onPointerDown={e=>start(e,i)} onPointerMove={move} onPointerUp={finish} onPointerCancel={()=>setDrag(null)} onDragStart={e=>e.preventDefault()}><PieceView piece={p}/></div>)}</div><p className="hint">ARRASTRA UNA FIGURA AL TABLERO</p>
   {drag&&<div className="drag-ghost" style={{left:drag.x,top:drag.y-70}}><PieceView piece={drag.piece}/></div>}{gameOver&&<div className="modal"><div><span>FIN DE LA PARTIDA</span><h2>GAME OVER</h2><p>PUNTUACIÓN FINAL</p><strong>{score}</strong><button onClick={reset}>NUEVA PARTIDA</button></div></div>}<footer>Forma palabras · Completa líneas · Mantén el ×5</footer>
  </main>
 }

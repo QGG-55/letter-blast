@@ -1,6 +1,6 @@
 # Letter Blast
 
-Fuente de verdad del proyecto. **Versión actual: v0.1.7**.
+Fuente de verdad del proyecto. **Versión actual: v0.1.8**.
 
 ## Concepto y reglas
 
@@ -37,6 +37,7 @@ Pendientes: diccionario español definitivo, pruebas E2E en dispositivos reales 
 - v0.1.5: explosiones más largas con destello, partículas, onda expansiva, impacto y desglose visible de puntos y total.
 - v0.1.6: cantidades ocultas en los carteles de explosión, eventos centrados en el multiplicador y paletas rotatorias al vaciar el tablero.
 - v0.1.7: el cartel central de resolución muestra exclusivamente el multiplicador aplicado (`×5` a `×1`).
+- v0.1.8: bandeja más próxima al tablero, diseño compacto en pantallas bajas y bloqueo explícito del scroll durante el arrastre táctil.
 
 ## Siguientes hitos
 

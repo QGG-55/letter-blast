@@ -1,0 +1,37 @@
+html,body { overscroll-behavior-y:none; }
+main { min-height:100dvh; }
+
+body.drag-active {
+  overflow:hidden;
+  touch-action:none;
+  overscroll-behavior:none;
+}
+
+.tray {
+  position:relative;
+  z-index:10;
+  margin-top:8px;
+}
+
+.piece-slot {
+  height:100px;
+  touch-action:none;
+  overscroll-behavior:contain;
+  -webkit-user-select:none;
+  user-select:none;
+  -webkit-touch-callout:none;
+}
+
+.hint { margin:7px 0 0; }
+footer { margin-top:10px; }
+
+@media (max-height:850px) {
+  main { padding-top:12px;padding-bottom:8px; }
+  header { margin-bottom:8px; }
+  .hud { margin-bottom:8px; }
+  .word-history { min-height:38px;margin:-2px 0 7px;padding:5px 10px; }
+  .tray { margin-top:5px; }
+  .piece-slot { height:88px; }
+  .hint { margin-top:4px; }
+  footer { margin-top:6px; }
+}
