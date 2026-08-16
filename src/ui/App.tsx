@@ -3,7 +3,7 @@ import { canPlace,canPlaceAny,centeredOrigin,emptyBoard,isBoardEmpty,key,multipl
 import { makeTray } from '../game/pieces'
 import type { Board,Piece,Point } from '../game/types'
 type Drag={piece:Piece;index:number;origin:Point|null;x:number;y:number}
-const VERSION='v0.1.8'
+const VERSION='v0.1.9'
 const RESOLUTION_MS=1100
 const INITIAL_TIME=Date.now()
 export default function App(){

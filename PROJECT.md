@@ -1,6 +1,6 @@
 # Letter Blast
 
-Fuente de verdad del proyecto. **Versión actual: v0.1.8**.
+Fuente de verdad del proyecto. **Versión actual: v0.1.9**.
 
 ## Concepto y reglas
 
@@ -38,6 +38,7 @@ Pendientes: diccionario español definitivo, pruebas E2E en dispositivos reales 
 - v0.1.6: cantidades ocultas en los carteles de explosión, eventos centrados en el multiplicador y paletas rotatorias al vaciar el tablero.
 - v0.1.7: el cartel central de resolución muestra exclusivamente el multiplicador aplicado (`×5` a `×1`).
 - v0.1.8: bandeja más próxima al tablero, diseño compacto en pantallas bajas y bloqueo explícito del scroll durante el arrastre táctil.
+- v0.1.9: ajuste dinámico del tablero a la altura útil para mantener visibles las tres figuras con la barra móvil abierta.
 
 ## Siguientes hitos
 

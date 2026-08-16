@@ -30,6 +30,7 @@ footer { margin-top:10px; }
   header { margin-bottom:8px; }
   .hud { margin-bottom:8px; }
   .word-history { min-height:38px;margin:-2px 0 7px;padding:5px 10px; }
+  .board { width:max(280px,min(100%,calc(100dvh - 420px)));margin-inline:auto; }
   .tray { margin-top:5px; }
   .piece-slot { height:88px; }
   .hint { margin-top:4px; }
