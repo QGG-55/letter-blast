@@ -32,7 +32,7 @@ export default function App(){
  }
  const reset=()=>{setBoard(emptyBoard());setPieces(makeTray());setScore(0);setCycle(Date.now());setNow(Date.now());setToast([]);setRecentWords([]);setPalette(0)}
  const openMenu=()=>{menuEnteredAt.current=Date.now();setDrag(null);setScreen('menu')}
- const startClassic=()=>{const resumedAt=Date.now();if(!classicStarted.current){reset();classicStarted.current=true}else if(menuEnteredAt.current!==null)setCycle(startedAt=>startedAt+(resumedAt-menuEnteredAt.current!));menuEnteredAt.current=null;setNow(resumedAt);setMenuNotice('');setScreen('game')}
+ const startClassic=()=>{const resumedAt=Date.now(),pausedAt=menuEnteredAt.current;if(!classicStarted.current){reset();classicStarted.current=true}else if(pausedAt!==null)setCycle(startedAt=>startedAt+(resumedAt-pausedAt));menuEnteredAt.current=null;setNow(resumedAt);setMenuNotice('');setScreen('game')}
  if(screen==='menu')return <StartMenu notice={menuNotice} onClassic={startClassic} onUnavailable={mode=>setMenuNotice(`${mode} · PRÓXIMAMENTE`)}/>
  const preview=new Set<string>();if(drag?.origin)drag.piece.cells.forEach(c=>preview.add(key({row:drag.origin!.row+c.row,col:drag.origin!.col+c.col})));const valid=!!(drag?.origin&&canPlace(board,drag.piece,drag.origin))
  return <main className={`${removing.size?'resolving ':''}palette-${palette}`}>
