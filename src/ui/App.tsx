@@ -3,11 +3,11 @@ import { canPlace,canPlaceAny,centeredOrigin,emptyBoard,isBoardEmpty,key,multipl
 import { makeTray } from '../game/pieces'
 import type { Board,Piece,Point } from '../game/types'
 type Drag={piece:Piece;index:number;origin:Point|null;x:number;y:number}
-const VERSION='v0.1.9'
+const VERSION='v0.2.0'
 const RESOLUTION_MS=1100
 const INITIAL_TIME=Date.now()
 export default function App(){
- const [board,setBoard]=useState<Board>(emptyBoard);const [pieces,setPieces]=useState<Piece[]>(makeTray);const [score,setScore]=useState(0);const [cycle,setCycle]=useState(INITIAL_TIME);const [now,setNow]=useState(INITIAL_TIME);const [drag,setDrag]=useState<Drag|null>(null);const [toast,setToast]=useState<string[]>([]);const [recentWords,setRecentWords]=useState<string[]>([]);const [palette,setPalette]=useState(0);const [removing,setRemoving]=useState(new Set<string>());const boardRef=useRef<HTMLDivElement>(null);const multiplier=multiplierAt(now-cycle);const gameOver=!canPlaceAny(board,pieces);const dragging=drag!==null
+ const [screen,setScreen]=useState<'menu'|'game'>('menu');const [menuNotice,setMenuNotice]=useState('');const [board,setBoard]=useState<Board>(emptyBoard);const [pieces,setPieces]=useState<Piece[]>(makeTray);const [score,setScore]=useState(0);const [cycle,setCycle]=useState(INITIAL_TIME);const [now,setNow]=useState(INITIAL_TIME);const [drag,setDrag]=useState<Drag|null>(null);const [toast,setToast]=useState<string[]>([]);const [recentWords,setRecentWords]=useState<string[]>([]);const [palette,setPalette]=useState(0);const [removing,setRemoving]=useState(new Set<string>());const boardRef=useRef<HTMLDivElement>(null);const multiplier=multiplierAt(now-cycle);const gameOver=!canPlaceAny(board,pieces);const dragging=drag!==null
  useEffect(()=>{const id=setInterval(()=>setNow(Date.now()),200);return()=>clearInterval(id)},[])
  useEffect(()=>{document.body.classList.toggle('drag-active',dragging);return()=>document.body.classList.remove('drag-active')},[dragging])
  const locate=useCallback((x:number,y:number,piece:Piece)=>{const board=boardRef.current,first=board?.children[0]?.getBoundingClientRect(),right=board?.children[1]?.getBoundingClientRect(),below=board?.children[SIZE]?.getBoundingClientRect();if(!first||!right||!below)return null;const col=(x-(first.left+first.width/2))/(right.left-first.left),row=(y-(first.top+first.height/2))/(below.top-first.top);return centeredOrigin({row,col},piece)},[])
@@ -31,9 +31,11 @@ export default function App(){
   setPieces(nextPieces.length?nextPieces:makeTray())
  }
  const reset=()=>{setBoard(emptyBoard());setPieces(makeTray());setScore(0);setCycle(Date.now());setNow(Date.now());setToast([]);setRecentWords([]);setPalette(0)}
+ const startClassic=()=>{reset();setMenuNotice('');setScreen('game')}
+ if(screen==='menu')return <StartMenu notice={menuNotice} onClassic={startClassic} onUnavailable={mode=>setMenuNotice(`${mode} · PRÓXIMAMENTE`)}/>
  const preview=new Set<string>();if(drag?.origin)drag.piece.cells.forEach(c=>preview.add(key({row:drag.origin!.row+c.row,col:drag.origin!.col+c.col})));const valid=!!(drag?.origin&&canPlace(board,drag.piece,drag.origin))
  return <main className={`${removing.size?'resolving ':''}palette-${palette}`}>
-  <header><div><span className="eyebrow">WORD PUZZLE</span><h1>LETTER <b>BLAST</b></h1></div><span className="version">{VERSION}</span></header>
+  <header><div><span className="eyebrow">WORD PUZZLE</span><h1>LETTER <b>BLAST</b></h1></div><div className="header-actions"><button onClick={()=>setScreen('menu')}>MENÚ</button><span className="version">{VERSION}</span></div></header>
   <section className="hud"><div><small>PUNTOS</small><strong>{String(score).padStart(4,'0')}</strong></div><div className="mult"><small>MULTIPLICADOR</small><strong>×{multiplier}</strong><i style={{transform:`scaleX(${multiplier===1?0:Math.max(0,1-(now-cycle)%3000/3000)})`}}/></div></section>
   <section className="word-history" aria-live="polite"><small>ÚLTIMAS PALABRAS</small><div>{recentWords.length?recentWords.map((word,i)=><span key={`${word}-${i}`}>{word}</span>):<em>—</em>}</div></section>
   <div className="stage"><div className="board" ref={boardRef}>{board.flatMap((row,r)=>row.map((cell,c)=><div key={`${r}-${c}`} className={`cell ${cell?'filled':''} ${preview.has(`${r}:${c}`)?(valid?'preview valid':'preview invalid'):''} ${removing.has(`${r}:${c}`)?'removing':''}`}>{cell?.letter}</div>))}</div>{toast.length>0&&<div className="toasts" aria-live="assertive">{toast.map((t,i)=><span key={i}>{t}</span>)}</div>}</div>
@@ -41,4 +43,5 @@ export default function App(){
   {drag&&<div className="drag-ghost" style={{left:drag.x,top:drag.y-70}}><PieceView piece={drag.piece}/></div>}{gameOver&&<div className="modal"><div><span>FIN DE LA PARTIDA</span><h2>GAME OVER</h2><p>PUNTUACIÓN FINAL</p><strong>{score}</strong><button onClick={reset}>NUEVA PARTIDA</button></div></div>}<footer>Forma palabras · Completa líneas · Mantén el ×5</footer>
  </main>
 }
+function StartMenu({notice,onClassic,onUnavailable}:{notice:string;onClassic:()=>void;onUnavailable:(mode:string)=>void}){return <main className="start-menu"><div className="menu-glow"/><section className="menu-content"><div className="menu-logo" aria-label="Letter Blast"><div className="menu-logo-mark"><i>L</i><i>B</i><i/><i/></div><span>WORD PUZZLE</span><h1>LETTER <b>BLAST</b></h1></div><nav className="mode-buttons" aria-label="Modos de juego"><button className="levels" onClick={()=>onUnavailable('NIVELES')}><small>AVENTURA</small>NIVELES</button><button className="classic" onClick={onClassic}><small>JUEGO ORIGINAL</small>CLASSIC</button><button className="club" onClick={()=>onUnavailable('CLUB')}><small>COMUNIDAD</small>CLUB</button></nav><p className="menu-notice" aria-live="polite">{notice||'ELIGE TU MODO DE JUEGO'}</p><span className="menu-version">{VERSION}</span></section></main>}
 function PieceView({piece}:{piece:Piece}){const rows=Math.max(...piece.cells.map(c=>c.row))+1,cols=Math.max(...piece.cells.map(c=>c.col))+1;return <div className="piece" style={{gridTemplateColumns:`repeat(${cols},var(--piece-cell))`,gridTemplateRows:`repeat(${rows},var(--piece-cell))`}}>{piece.cells.map((c,i)=><div className="mini" key={i} style={{gridRow:c.row+1,gridColumn:c.col+1}}>{c.letter}</div>)}</div>}

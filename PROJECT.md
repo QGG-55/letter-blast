@@ -1,6 +1,6 @@
 # Letter Blast
 
-Fuente de verdad del proyecto. **Versión actual: v0.1.9**.
+Fuente de verdad del proyecto. **Versión actual: v0.2.0**.
 
 ## Concepto y reglas
 
@@ -39,6 +39,7 @@ Pendientes: diccionario español definitivo, pruebas E2E en dispositivos reales 
 - v0.1.7: el cartel central de resolución muestra exclusivamente el multiplicador aplicado (`×5` a `×1`).
 - v0.1.8: bandeja más próxima al tablero, diseño compacto en pantallas bajas y bloqueo explícito del scroll durante el arrastre táctil.
 - v0.1.9: ajuste dinámico del tablero a la altura útil para mantener visibles las tres figuras con la barra móvil abierta.
+- v0.2.0: pantalla inicial con identidad Letter Blast y accesos a Niveles, Classic y Club; Classic abre el juego actual y los otros modos quedan señalados como próximos.
 
 ## Siguientes hitos
 
