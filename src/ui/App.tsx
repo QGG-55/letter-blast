@@ -3,11 +3,11 @@ import { canPlace,canPlaceAny,centeredOrigin,emptyBoard,isBoardEmpty,key,multipl
 import { makeTray } from '../game/pieces'
 import type { Board,Piece,Point } from '../game/types'
 type Drag={piece:Piece;index:number;origin:Point|null;x:number;y:number}
-const VERSION='v0.2.0'
+const VERSION='v0.2.1'
 const RESOLUTION_MS=1100
 const INITIAL_TIME=Date.now()
 export default function App(){
- const [screen,setScreen]=useState<'menu'|'game'>('menu');const [menuNotice,setMenuNotice]=useState('');const [board,setBoard]=useState<Board>(emptyBoard);const [pieces,setPieces]=useState<Piece[]>(makeTray);const [score,setScore]=useState(0);const [cycle,setCycle]=useState(INITIAL_TIME);const [now,setNow]=useState(INITIAL_TIME);const [drag,setDrag]=useState<Drag|null>(null);const [toast,setToast]=useState<string[]>([]);const [recentWords,setRecentWords]=useState<string[]>([]);const [palette,setPalette]=useState(0);const [removing,setRemoving]=useState(new Set<string>());const boardRef=useRef<HTMLDivElement>(null);const multiplier=multiplierAt(now-cycle);const gameOver=!canPlaceAny(board,pieces);const dragging=drag!==null
+ const [screen,setScreen]=useState<'menu'|'game'>('menu');const [menuNotice,setMenuNotice]=useState('');const [board,setBoard]=useState<Board>(emptyBoard);const [pieces,setPieces]=useState<Piece[]>(makeTray);const [score,setScore]=useState(0);const [cycle,setCycle]=useState(INITIAL_TIME);const [now,setNow]=useState(INITIAL_TIME);const [drag,setDrag]=useState<Drag|null>(null);const [toast,setToast]=useState<string[]>([]);const [recentWords,setRecentWords]=useState<string[]>([]);const [palette,setPalette]=useState(0);const [removing,setRemoving]=useState(new Set<string>());const boardRef=useRef<HTMLDivElement>(null);const menuEnteredAt=useRef<number|null>(null);const classicStarted=useRef(false);const multiplier=multiplierAt(now-cycle);const gameOver=!canPlaceAny(board,pieces);const dragging=drag!==null
  useEffect(()=>{const id=setInterval(()=>setNow(Date.now()),200);return()=>clearInterval(id)},[])
  useEffect(()=>{document.body.classList.toggle('drag-active',dragging);return()=>document.body.classList.remove('drag-active')},[dragging])
  const locate=useCallback((x:number,y:number,piece:Piece)=>{const board=boardRef.current,first=board?.children[0]?.getBoundingClientRect(),right=board?.children[1]?.getBoundingClientRect(),below=board?.children[SIZE]?.getBoundingClientRect();if(!first||!right||!below)return null;const col=(x-(first.left+first.width/2))/(right.left-first.left),row=(y-(first.top+first.height/2))/(below.top-first.top);return centeredOrigin({row,col},piece)},[])
@@ -31,11 +31,12 @@ export default function App(){
   setPieces(nextPieces.length?nextPieces:makeTray())
  }
  const reset=()=>{setBoard(emptyBoard());setPieces(makeTray());setScore(0);setCycle(Date.now());setNow(Date.now());setToast([]);setRecentWords([]);setPalette(0)}
- const startClassic=()=>{reset();setMenuNotice('');setScreen('game')}
+ const openMenu=()=>{menuEnteredAt.current=Date.now();setDrag(null);setScreen('menu')}
+ const startClassic=()=>{const resumedAt=Date.now();if(!classicStarted.current){reset();classicStarted.current=true}else if(menuEnteredAt.current!==null)setCycle(startedAt=>startedAt+(resumedAt-menuEnteredAt.current!));menuEnteredAt.current=null;setNow(resumedAt);setMenuNotice('');setScreen('game')}
  if(screen==='menu')return <StartMenu notice={menuNotice} onClassic={startClassic} onUnavailable={mode=>setMenuNotice(`${mode} · PRÓXIMAMENTE`)}/>
  const preview=new Set<string>();if(drag?.origin)drag.piece.cells.forEach(c=>preview.add(key({row:drag.origin!.row+c.row,col:drag.origin!.col+c.col})));const valid=!!(drag?.origin&&canPlace(board,drag.piece,drag.origin))
  return <main className={`${removing.size?'resolving ':''}palette-${palette}`}>
-  <header><div><span className="eyebrow">WORD PUZZLE</span><h1>LETTER <b>BLAST</b></h1></div><div className="header-actions"><button onClick={()=>setScreen('menu')}>MENÚ</button><span className="version">{VERSION}</span></div></header>
+  <header><div><span className="eyebrow">WORD PUZZLE</span><h1>LETTER <b>BLAST</b></h1></div><div className="header-actions"><button onClick={openMenu}>MENÚ</button><span className="version">{VERSION}</span></div></header>
   <section className="hud"><div><small>PUNTOS</small><strong>{String(score).padStart(4,'0')}</strong></div><div className="mult"><small>MULTIPLICADOR</small><strong>×{multiplier}</strong><i style={{transform:`scaleX(${multiplier===1?0:Math.max(0,1-(now-cycle)%3000/3000)})`}}/></div></section>
   <section className="word-history" aria-live="polite"><small>ÚLTIMAS PALABRAS</small><div>{recentWords.length?recentWords.map((word,i)=><span key={`${word}-${i}`}>{word}</span>):<em>—</em>}</div></section>
   <div className="stage"><div className="board" ref={boardRef}>{board.flatMap((row,r)=>row.map((cell,c)=><div key={`${r}-${c}`} className={`cell ${cell?'filled':''} ${preview.has(`${r}:${c}`)?(valid?'preview valid':'preview invalid'):''} ${removing.has(`${r}:${c}`)?'removing':''}`}>{cell?.letter}</div>))}</div>{toast.length>0&&<div className="toasts" aria-live="assertive">{toast.map((t,i)=><span key={i}>{t}</span>)}</div>}</div>
