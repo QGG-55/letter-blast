@@ -69,6 +69,7 @@
 .mode-buttons .levels { background:linear-gradient(135deg,#7654df,#4b35a7); }
 .mode-buttons .classic { background:linear-gradient(135deg,#ffcf4c,#f19a21);color:#25203c;box-shadow:0 13px 34px #ffb42b33,inset 0 -5px 0 #c97816; }
 .mode-buttons .club { background:linear-gradient(135deg,#21cdb8,#168c9b); }
+.mode-buttons .shop { background:linear-gradient(135deg,#ff6f91,#c83b78); }
 
 .menu-notice { min-height:16px;margin:20px 0 8px;color:#8f98c6;font-size:10px;letter-spacing:.13em; }
 .menu-version { color:#555e86;font-size:10px; }
@@ -76,4 +77,4 @@
 .header-actions { display:flex;align-items:center;gap:10px; }
 .header-actions button { padding:5px 8px;border:1px solid #313a61;border-radius:8px;background:#151b35;color:#8993bd;font:900 9px Nunito,sans-serif;letter-spacing:.08em;cursor:pointer; }
 
-@media(max-height:700px){.menu-logo{margin-bottom:22px}.menu-logo-mark{grid-template-columns:repeat(2,40px);grid-template-rows:repeat(2,40px)}.menu-logo h1{font-size:32px}.mode-buttons button{min-height:66px}.menu-notice{margin-top:12px}}
+@media(max-height:760px){.start-menu{padding-block:14px}.menu-logo{margin-bottom:16px}.menu-logo-mark{grid-template-columns:repeat(2,36px);grid-template-rows:repeat(2,36px)}.menu-logo-mark i{font-size:22px;border-radius:10px}.menu-logo>span{margin-top:8px}.menu-logo h1{font-size:29px}.mode-buttons{gap:8px}.mode-buttons button{min-height:58px;padding-block:8px;font-size:20px}.mode-buttons small{margin-bottom:4px}.menu-notice{margin-top:9px}}

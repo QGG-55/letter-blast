@@ -1,6 +1,6 @@
 # Letter Blast
 
-Fuente de verdad del proyecto. **Versión actual: v0.3.1**.
+Fuente de verdad del proyecto. **Versión actual: v0.3.2**.
 
 ## Concepto y reglas
 
@@ -43,6 +43,7 @@ Pendientes: diccionario español definitivo, pruebas E2E en dispositivos reales 
 - v0.2.1: volver al menú pausa la partida Classic; al entrar de nuevo se conservan tablero, puntuación, multiplicador, figuras y palabras.
 - v0.3.0: modo Niveles con 100 retos, objetivos alternativos de palabras o puntos, desbloqueo progresivo y progreso guardado en el dispositivo.
 - v0.3.1: selector de niveles convertido en un recorrido de puertas celestiales entre cielo, nubes y luz.
+- v0.3.2: nuevo acceso Tienda debajo de Club en el menú principal, preparado para su desarrollo posterior.
 
 ## Siguientes hitos
 
