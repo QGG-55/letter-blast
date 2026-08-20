@@ -5,7 +5,7 @@ import type { Board,Piece,Point } from '../game/types'
 type Drag={piece:Piece;index:number;origin:Point|null;x:number;y:number}
 type GameMode='classic'|'level'
 type ClassicSave={board:Board;pieces:Piece[];score:number;cycle:number;recentWords:string[];palette:number;pausedAt:number}
-const VERSION='v0.3.0'
+const VERSION='v0.3.1'
 const RESOLUTION_MS=1100
 const INITIAL_TIME=Date.now()
 export default function App(){
