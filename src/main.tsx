@@ -8,4 +8,5 @@ import './ui/palettes.css'
 import './ui/mobile-interaction.css'
 import './ui/start-menu.css'
 import './ui/levels.css'
+import './ui/shop.css'
 createRoot(document.getElementById('root')!).render(<StrictMode><App /></StrictMode>)

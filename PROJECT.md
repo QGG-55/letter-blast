@@ -1,6 +1,6 @@
 # Letter Blast
 
-Fuente de verdad del proyecto. **Versión actual: v0.3.4**.
+Fuente de verdad del proyecto. **Versión actual: v0.4.0**.
 
 ## Concepto y reglas
 
@@ -46,6 +46,7 @@ Pendientes: diccionario español definitivo, pruebas E2E en dispositivos reales 
 - v0.3.2: nuevo acceso Tienda debajo de Club en el menú principal, preparado para su desarrollo posterior.
 - v0.3.3: los niveles se distribuyen como puertas alternas conectadas por un camino celestial en zigzag.
 - v0.3.4: mapa de niveles con camino serpenteante y puertas envejecidas; las bloqueadas incorporan cadenas cruzadas y candado.
+- v0.4.0: puertas completadas en verde, monedero persistente de gemas, Tienda a 1 € por gema y reintentos de nivel por una gema.
 
 ## Siguientes hitos
 
