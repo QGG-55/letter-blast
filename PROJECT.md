@@ -1,6 +1,6 @@
 # Letter Blast
 
-Fuente de verdad del proyecto. **Versión actual: v0.3.3**.
+Fuente de verdad del proyecto. **Versión actual: v0.3.4**.
 
 ## Concepto y reglas
 
@@ -45,6 +45,7 @@ Pendientes: diccionario español definitivo, pruebas E2E en dispositivos reales 
 - v0.3.1: selector de niveles convertido en un recorrido de puertas celestiales entre cielo, nubes y luz.
 - v0.3.2: nuevo acceso Tienda debajo de Club en el menú principal, preparado para su desarrollo posterior.
 - v0.3.3: los niveles se distribuyen como puertas alternas conectadas por un camino celestial en zigzag.
+- v0.3.4: mapa de niveles con camino serpenteante y puertas envejecidas; las bloqueadas incorporan cadenas cruzadas y candado.
 
 ## Siguientes hitos
 
