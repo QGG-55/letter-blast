@@ -1,6 +1,6 @@
-# Letter Blast
+# Letter Fusion
 
-Fuente de verdad del proyecto. **Versión actual: v0.4.0**.
+Fuente de verdad del proyecto. **Versión actual: v0.5.0**.
 
 ## Concepto y reglas
 
@@ -39,7 +39,7 @@ Pendientes: diccionario español definitivo, pruebas E2E en dispositivos reales 
 - v0.1.7: el cartel central de resolución muestra exclusivamente el multiplicador aplicado (`×5` a `×1`).
 - v0.1.8: bandeja más próxima al tablero, diseño compacto en pantallas bajas y bloqueo explícito del scroll durante el arrastre táctil.
 - v0.1.9: ajuste dinámico del tablero a la altura útil para mantener visibles las tres figuras con la barra móvil abierta.
-- v0.2.0: pantalla inicial con identidad Letter Blast y accesos a Niveles, Classic y Club; Classic abre el juego actual y los otros modos quedan señalados como próximos.
+- v0.2.0: pantalla inicial con la primera identidad del juego y accesos a Niveles, Classic y Club; Classic abre el juego actual y los otros modos quedan señalados como próximos.
 - v0.2.1: volver al menú pausa la partida Classic; al entrar de nuevo se conservan tablero, puntuación, multiplicador, figuras y palabras.
 - v0.3.0: modo Niveles con 100 retos, objetivos alternativos de palabras o puntos, desbloqueo progresivo y progreso guardado en el dispositivo.
 - v0.3.1: selector de niveles convertido en un recorrido de puertas celestiales entre cielo, nubes y luz.
@@ -47,9 +47,11 @@ Pendientes: diccionario español definitivo, pruebas E2E en dispositivos reales 
 - v0.3.3: los niveles se distribuyen como puertas alternas conectadas por un camino celestial en zigzag.
 - v0.3.4: mapa de niveles con camino serpenteante y puertas envejecidas; las bloqueadas incorporan cadenas cruzadas y candado.
 - v0.4.0: puertas completadas en verde, monedero persistente de gemas, Tienda a 1 € por gema y reintentos de nivel por una gema.
+- v0.5.0: cambio integral de marca a Letter Fusion, nuevo logotipo LF y base SEO con contenido descriptivo, metadatos sociales, datos estructurados, sitemap y robots; el progreso guardado con la marca anterior se migra automáticamente.
 
 ## Siguientes hitos
 
 1. Validar tacto y ergonomía en varios móviles reales.
 2. Incorporar un diccionario español completo y eficiente.
 3. Añadir persistencia local y telemetría respetuosa con la privacidad.
+4. Conectar un dominio propio de Letter Fusion y darlo de alta en Google Search Console.

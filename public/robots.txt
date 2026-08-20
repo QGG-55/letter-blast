@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://letter-blast.onrender.com/sitemap.xml
