@@ -73,7 +73,9 @@
 .mode-buttons .shop { background:linear-gradient(135deg,#ff6f91,#c83b78); }
 
 .menu-notice { min-height:16px;margin:20px 0 8px;color:#8f98c6;font-size:10px;letter-spacing:.13em; }
-.menu-version { color:#555e86;font-size:10px; }
+.menu-version { color:#68729e;font-size:10px; }
+.version-update { padding:4px 6px;border:0;background:transparent;font-family:inherit;cursor:pointer;touch-action:manipulation; }
+.version-update:active { color:#ffd04d;transform:scale(.96); }
 
 .header-actions { display:flex;align-items:center;gap:10px; }
 .header-actions button { padding:5px 8px;border:1px solid #313a61;border-radius:8px;background:#151b35;color:#8993bd;font:900 9px Nunito,sans-serif;letter-spacing:.08em;cursor:pointer; }

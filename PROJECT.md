@@ -1,6 +1,6 @@
 # Letter Fusion
 
-Fuente de verdad del proyecto. **Versión actual: v0.5.0**.
+Fuente de verdad del proyecto. **Versión actual: v0.5.1**.
 
 ## Concepto y reglas
 
@@ -48,6 +48,7 @@ Pendientes: diccionario español definitivo, pruebas E2E en dispositivos reales 
 - v0.3.4: mapa de niveles con camino serpenteante y puertas envejecidas; las bloqueadas incorporan cadenas cruzadas y candado.
 - v0.4.0: puertas completadas en verde, monedero persistente de gemas, Tienda a 1 € por gema y reintentos de nivel por una gema.
 - v0.5.0: cambio integral de marca a Letter Fusion, nuevo logotipo LF y base SEO con contenido descriptivo, metadatos sociales, datos estructurados, sitemap y robots; el progreso guardado con la marca anterior se migra automáticamente.
+- v0.5.1: la versión visible funciona como botón de actualización de la PWA; comprueba el service worker, activa la versión disponible y recarga la aplicación.
 
 ## Siguientes hitos
 
